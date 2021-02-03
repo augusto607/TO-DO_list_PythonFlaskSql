@@ -1,0 +1,19 @@
+<!--archivo create.html, plantilla para la creacion de un todo-->
+
+<!--indicamos que esta plantilla se extiende a una padre-->
+{% extends 'base.html' %}
+
+<!--extendemos el bloque de cabecera-->
+{% block header %}
+    <h1>{% block title %}Nuevo Todo{% endblock %}</h1>
+{% endblock %}
+
+<!--extendemos el bloque de contenido-->
+{% block content %}
+    <!--creamos un formulario-->
+    <form method="POST">
+        <label for="description">Descripcion</label>
+        <input name="description" id="description" required />
+        <input type="submit" value="Guardar" />
+    </form>
+{% endblock %}

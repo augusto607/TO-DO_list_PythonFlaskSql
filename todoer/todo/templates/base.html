@@ -1,0 +1,32 @@
+<!--archivo base.html, esta es la plantilla padre-->
+
+<!doctype html>
+<!--configuramos el bloque de titulo-->
+<title>{% block title %}{% endblock %} - Todo List</title>
+<!--incluimos el archivo css-->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<!--configuramos una estructura html-->
+<nav>
+    <h1>Todo List</h1>
+    <!--creamos una lista para dejar el estado de la aplicacion-->
+    <ul>
+        {% if g.user %}
+            <li><span>{{ g.user['username'] }}</span></li>
+            <li><a href="{{ url_for('auth.logout') }}">Cerrar sesion</a></li>
+        {% else %}
+            <li><a href="{{ url_for('auth.register') }}">Registrarse</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Iniciar sesion</a></li>
+        {% endif %}
+    </ul>
+</nav>
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    <!--imprimir los mensajes flash-->
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <!--imprimir el contenido-->
+    {% block content %}{% endblock %}
+</section>
